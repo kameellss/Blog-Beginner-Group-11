@@ -1,20 +1,22 @@
 <?php
+use App\Http\Controllers\ArticleController;
+use App\Http\Controllers\StaticPageController;
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\HomepageController;
+use App\Http\Controllers\CategoryController; // Tambahkan
+use App\Http\Controllers\TagController; // Tambahkan
 
-use App\Http\Controllers\ProfileController;
-use Illuminate\Support\Facades\Route;
+Route::get('/', [ArticleController::class, 'index'])->name('homepage');
+Route::get('/article/{id}', [ArticleController::class, 'show'])->name('article.show');
+Route::get('/about', [StaticPageController::class, 'about'])->name('about');
 
-Route::get('/', function () {
-    return view('welcome');
+Route::prefix('admin')->middleware('auth')->group(function () {
+    Route::get('/', [AdminController::class, 'index'])->name('admin.dashboard');
+    Route::resource('categories', CategoryController::class);
+    Route::resource('tags', TagController::class);
+    Route::resource('articles', ArticleController::class);
 });
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-});
+Route::get('/', [HomepageController::class, 'index']);
 
-require __DIR__.'/auth.php';
