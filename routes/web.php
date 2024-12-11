@@ -7,7 +7,7 @@ use App\Http\Controllers\CategoryController; // Tambahkan
 use App\Http\Controllers\TagController; // Tambahkan
 
 Route::get('/', [ArticleController::class, 'index'])->name('homepage');
-Route::get('/article/{id}', [ArticleController::class, 'show'])->name('article.show');
+Route::get('/article/{id}', [ArticleController::class, 'show'])->name('detailarticle');
 Route::get('/about', [StaticPageController::class, 'about'])->name('about');
 
 Route::prefix('admin')->middleware('auth')->group(function () {
@@ -19,4 +19,4 @@ Route::prefix('admin')->middleware('auth')->group(function () {
 
 
 Route::get('/', [HomepageController::class, 'index']);
-
+Route::get('/article/{title}', [ArticleController::class, 'show']);

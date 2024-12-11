@@ -10,10 +10,11 @@ class TagSeeder extends Seeder
 {
     public function run()
     {
-        // Create some tags
-        Tag::create(['name' => 'User Experience']);
-        Tag::create(['name' => 'Machine Learning']);
-        Tag::create(['name' => 'Cyber Security']);
-        Tag::create(['name' => 'Web Development']);
+        // Create makeup-related tags
+        Tag::create(['name' => 'Foundation']);
+        Tag::create(['name' => 'Lipstick']);
+        Tag::create(['name' => 'Eyeshadow']);
+        Tag::create(['name' => 'Skincare Routine']);
+        Tag::create(['name' => 'Beauty Tips']);
     }
 }
